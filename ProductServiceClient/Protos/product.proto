@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcProductService";
+
+package product;
+
+// The product service definition.
+service ProductServiceGrpc {
+	// Unary RPC
+  rpc GetProductInfo(ProductRequest) returns (ProductResponse);
+	// Server streaming RPC
+  rpc GetProductList(ProductRequest) returns (stream ProductResponse);
+	// Client streaming RPC
+  rpc GetProductListClientStream(stream ProductRequest) returns (ProductResponse);
+	 // Bidirectional streaming RPC
+  rpc GetProductListBidirectionalStream(stream ProductRequest) returns (stream ProductResponse);
+}
+
+// The request message containing the product ID.
+message ProductRequest {
+  string id = 1;
+  string email = 2;
+}
+
+// The response message containing the product details.
+message ProductResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  float price = 4;
+}
